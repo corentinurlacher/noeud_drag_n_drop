@@ -1,0 +1,23 @@
+﻿@using static BlazorDraggableDemo.Components.Connector
+@using static BlazorDraggableDemo.Components.Cercle
+@inject MouseService mouseSrv;
+
+<div class="row mt-2">
+    <div class="col">
+        <svg class="bg-light" width="100%" height="500" xmlns="http://www.w3.org/2000/svg"
+            @onmousemove=@(e => mouseSrv.FireMove(this, e))
+            @onmouseup=@(e => mouseSrv.FireUp(this, e))
+            @onmouseleave=@(e => mouseSrv.FireLeave(this, e))>
+            @foreach (var plt in Nodes)
+            { 
+                //Ajoute un cercle avec son connecteur a son parent
+                <Cercle Node="@plt"></Cercle>
+            }
+        </svg>
+    </div>
+</div>
+<NouveauNoeud Noeuds="Nodes"></NouveauNoeud>
+
+@code {
+    [Parameter] public List<Noeud> Nodes { get; set; }
+}

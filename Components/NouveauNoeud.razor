@@ -1,0 +1,52 @@
+﻿<div class="container">
+    <h3>Création de nœud</h3>
+    <EditForm Model="model" OnValidSubmit="Save">
+        <div class="form-group">
+            <label for="R">Rayon :</label>
+            <InputNumber class="form-control" id="R" @bind-Value="model.R" min="40" max="100" />
+        </div>
+        <div class="form-group">
+            <label for="Link">Lien :</label>
+            <InputText class="form-control" id="Link" @bind-Value="model.Link" />
+        </div>
+        <div class="form-group">
+            <label for="Name">Nom :</label>
+            <InputText class="form-control" id="Name" @bind-Value="model.Name" />
+        </div>
+        <div class="form-group">
+            <label>Parent :</label>
+            <select class="form-control" id="ParentId" @bind="@tempId">
+                <option selected value="">Aucun parent</option>
+                @foreach (var node in Noeuds)
+                {
+                    <option value="@node.IdNoeud">@node.Name @node.IdNoeud</option>
+                }
+            </select>
+        </div>
+        <button class="btn btn-primary">Enregistrer</button>
+    </EditForm>
+</div>
+
+@code {
+    [Parameter] public List<Noeud> Noeuds { get; set; }
+
+    private Noeud model;
+    private int tempId;
+    protected override void OnInitialized()
+    {
+        // Initialisez le modèle avec des valeurs par défaut ou chargez-le depuis une source de données.
+        model = new Noeud() { Name = "" };
+    }
+
+    private void Save()
+    {
+        foreach (var item in Noeuds)
+        {
+            if (item.IdNoeud == tempId)
+                model.Parent = item;
+        }
+        model.IdNoeud = Noeuds.Count + 1;
+        Noeuds.Add(model);
+        model = new();
+    }
+}
