@@ -10,13 +10,12 @@ namespace BlazorDraggableDemo.Components
         public double Y = 50;
         public double R = 40;
         public Direction Dir;
-        public double RootX;
-        public double RootY;
         public string Link = @"/";
-        public string Name = @"Noeud";
+        public string Name = @"";
 
         public string Fill = "#333";
         public double ConnectY => Dir == Direction.Top ? Y - R : Y + R;
+        public List<Noeud> Enfants { get; set; }
 
     }
 }

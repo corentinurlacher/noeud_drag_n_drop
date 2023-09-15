@@ -8,10 +8,11 @@
 @for (int i = 0; i < plants.Count; i++)
 {
     plants[i].Parent = plants[0];
+    plants[i].Enfants.Add(plants[i]);
 }
 @code{
     List<Noeud> plants = new(){
-        new Noeud {Name= "Main", IdNoeud = 0, X =362, Y = 280, R= 50, RootX=400, RootY=400, Link="https://www.youtube.com/watch?v=OAmhM-", Dir=Direction.Bottom, Fill="#1aaee5" },
+        new Noeud {Enfants = new(), Name= "Main", IdNoeud = 0, X =362, Y = 280, R= 50, Dir=Direction.Bottom, Fill="#1aaee5" },
         };
         
 }

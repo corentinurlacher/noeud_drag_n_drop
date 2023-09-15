@@ -1,4 +1,5 @@
-﻿<div class="container">
+﻿@using static BlazorDraggableDemo.Components.Connector;
+<div class="container">
     <h3>Création de nœud</h3>
     <EditForm Model="model" OnValidSubmit="Save">
         <div class="form-group">
@@ -43,10 +44,16 @@
         foreach (var item in Noeuds)
         {
             if (item.IdNoeud == tempId)
+            {
                 model.Parent = item;
+                item.Enfants.Add(model); // Ajoutez le modèle comme enfant de l'élément sélectionné
+            }
         }
+        model.Dir = Direction.Bottom;
         model.IdNoeud = Noeuds.Count + 1;
+        model.Enfants = new();
         Noeuds.Add(model);
-        model = new();
+        model = new Noeud(); // Réinitialisez le modèle pour un nouvel enregistrement
     }
+
 }

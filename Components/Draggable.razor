@@ -7,6 +7,7 @@
 
 @code {
     [Parameter] public RenderFragment? ChildContent { get; set; }
+    [Parameter] public EventCallback OnDragEnd { get; set; }
 
 
     double? x;
@@ -64,7 +65,6 @@
 
         cursorX = e.ClientX;
         cursorY = e.ClientY;
-
         XChanged.InvokeAsync(x.Value);
         YChanged.InvokeAsync(y.Value);
     }
