@@ -1,3 +1,5 @@
+
+
 {
   "iisSettings": {
     "windowsAuthentication": false,
@@ -5,6 +7,9 @@
     "iisExpress": {
       "applicationUrl": "http://localhost:10602",
       "sslPort": 44314
+    },
+    "ConnectionStrings": {
+      "DefaultConnection": "Server=dicjwin01.cegepjonquiere.ca;Database=prog4-projet06;User id=prog4-projet06;Password=prog4-projet06;"
     }
   },
   "profiles": {
