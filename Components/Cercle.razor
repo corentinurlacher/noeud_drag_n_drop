@@ -1,10 +1,18 @@
 ﻿@using static BlazorDraggableDemo.Components.Connector;
 <Connector X1=Node.Parent.X Y1=Node.Parent.ConnectY X2=Node.X Y2=Node.Y Dir1=Direction.Bottom Dir2=Node.Dir />
-<Draggable @bind-X=Node.X @bind-Y=Node.Y OnDragEnd="OnParentDragEnd">
+<Draggable @bind-X=Node.X @bind-Y=Node.Y>
     <circle r="@Node.R" class="cercle" />
     <NavLink href="@Node.Link">
         <text text-anchor="middle" alignment-baseline="central">@Node.Name</text>
     </NavLink>
+    @if(Node.Enfants.Count > 0)
+    {
+      @foreach (var item in Nodes)
+        {
+            <Cercle Node="item" Nodes="item.Enfants"></Cercle>
+        }  
+    }
+    
 </Draggable>
 
 <style>
@@ -34,30 +42,7 @@
 </style>
 @code {
     [Parameter] public BlazorDraggableDemo.Components.Noeud Node { get; set; }
+    [Parameter] public List<BlazorDraggableDemo.Components.Noeud> Nodes { get; set; }
+
     [Parameter] public EventCallback OnDragEnd { get; set; }
-
-    private void OnParentDragEnd()
-    {
-        // Mettre à jour les positions des enfants lorsque le parent est déplacé
-        UpdateChildPositions(Node, Node.X, Node.Y);
-
-        // Déclencher l'événement OnDragEnd
-        OnDragEnd.InvokeAsync(null);
-    }
-
-    private void UpdateChildPositions(BlazorDraggableDemo.Components.Noeud parent, double newX, double newY)
-    {
-        // Mettre à jour la position de chaque enfant
-        foreach (var child in parent.Enfants)
-        {
-            child.X += newX - parent.X;
-            child.Y += newY - parent.Y;
-
-            // Appel récursif pour les sous-enfants s'il y en a
-            if (child.Enfants.Any())
-            {
-                UpdateChildPositions(child, child.X, child.Y);
-            }
-        }
-    }
 }

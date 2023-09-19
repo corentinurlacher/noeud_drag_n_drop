@@ -8,11 +8,7 @@
             @onmousemove=@(e => mouseSrv.FireMove(this, e))
             @onmouseup=@(e => mouseSrv.FireUp(this, e))
             @onmouseleave=@(e => mouseSrv.FireLeave(this, e))>
-            @foreach (var plt in Nodes)
-            { 
-                //Ajoute un cercle avec son connecteur a son parent
-                <Cercle Node="@plt"></Cercle>
-            }
+            <Cercle Node="@Nodes[0]" Nodes="@Nodes"></Cercle>
         </svg>
     </div>
 </div>
