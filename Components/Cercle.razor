@@ -1,18 +1,12 @@
 ﻿@using static BlazorDraggableDemo.Components.Connector;
 <Connector X1=Node.Parent.X Y1=Node.Parent.ConnectY X2=Node.X Y2=Node.Y Dir1=Direction.Bottom Dir2=Node.Dir />
-<Draggable @bind-X=Node.X @bind-Y=Node.Y>
-    <circle r="@Node.R" class="cercle" />
-    <NavLink href="@Node.Link">
-        <text text-anchor="middle" alignment-baseline="central">@Node.Name</text>
-    </NavLink>
-    @if(Node.Enfants.Count > 0)
-    {
-      @foreach (var item in Nodes)
-        {
-            <Cercle Node="item" Nodes="item.Enfants"></Cercle>
-        }  
-    }
-    
+
+    <Draggable @bind-X=Node.X @bind-Y=Node.Y>
+        <circle r="@Node.R" class="cercle" />
+        <NavLink href="@Node.Link">
+            <text text-anchor="middle" alignment-baseline="central">@Node.Name</text>
+        </NavLink>
+
 </Draggable>
 
 <style>
@@ -42,7 +36,4 @@
 </style>
 @code {
     [Parameter] public BlazorDraggableDemo.Components.Noeud Node { get; set; }
-    [Parameter] public List<BlazorDraggableDemo.Components.Noeud> Nodes { get; set; }
-
-    [Parameter] public EventCallback OnDragEnd { get; set; }
 }

@@ -14,7 +14,6 @@ namespace BlazorDraggableDemo.Components
         public string Name = @"";
         public string Fill = "#333";
         public double ConnectY => Dir == Direction.Top ? Y - R : Y + R;
-        public List<Noeud>? Enfants { get; set; }
-
+        public List<Noeud>? Enfants { get; set; } = new();
     }
 }

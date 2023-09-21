@@ -1,0 +1,16 @@
+﻿<h3>CercleGrp</h3>
+    <Draggable X=@X Y=@Y>
+
+        @for (int i = 0; i < Noeud.Enfants.Count; i++)
+        {
+            <Cercle CanAddEnfant=true Node="Noeud.Enfants[i]" Nodes="Noeud.Enfants"></Cercle>
+
+        }
+    <rect x="10" y="10" width="30" height="30" stroke="black" fill="transparent" stroke-width="5" />
+
+    </Draggable>
+    @code {
+    double X = 290;
+    double Y = 250;
+    [Parameter] public Noeud Noeud { get; set; }
+}
